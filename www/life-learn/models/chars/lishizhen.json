@@ -1,0 +1,113 @@
+{
+  "clips": {
+    "idle": {
+      "preset": "idle",
+      "duration": 15.367,
+      "loop": true,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0,
+        "dy": 0,
+        "seconds": 15.367
+      },
+      "groundSpeed": 0
+    },
+    "walk": {
+      "preset": "walk",
+      "duration": 2.367,
+      "loop": true,
+      "travel": "detrend",
+      "hipTravel": {
+        "dx": -0.0749,
+        "dy": -1.5737,
+        "seconds": 2.367
+      },
+      "groundSpeed": 0.6657
+    },
+    "idle-relax": {
+      "preset": "standing_relax",
+      "duration": 17.6,
+      "loop": true,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0,
+        "dy": 0.0008,
+        "seconds": 17.6
+      },
+      "groundSpeed": 0
+    },
+    "look-around": {
+      "preset": "look_around",
+      "duration": 15.6,
+      "loop": true,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0.0019,
+        "dy": 0.0048,
+        "seconds": 15.6
+      },
+      "groundSpeed": 0
+    },
+    "wave": {
+      "preset": "wave_goodbye_02",
+      "duration": 5.9,
+      "loop": false,
+      "travel": "pin",
+      "hipTravel": {
+        "dx": 0.4077,
+        "dy": -1.163,
+        "seconds": 5.9
+      },
+      "groundSpeed": 0
+    },
+    "laugh": {
+      "preset": "laugh_01",
+      "duration": 5.6,
+      "loop": false,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": -0.0002,
+        "dy": -0.0005,
+        "seconds": 5.6
+      },
+      "groundSpeed": 0
+    },
+    "sit": {
+      "preset": "sit",
+      "duration": 7.2,
+      "loop": false,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0,
+        "dy": 0,
+        "seconds": 7.2
+      },
+      "groundSpeed": 0
+    },
+    "agree": {
+      "preset": "agree",
+      "duration": 4.033,
+      "loop": false,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": -0.0007,
+        "dy": -0.0004,
+        "seconds": 4.033
+      },
+      "groundSpeed": 0
+    },
+    "bow": {
+      "preset": "bow",
+      "duration": 6.033,
+      "loop": false,
+      "travel": "pin",
+      "hipTravel": {
+        "dx": 0.0008,
+        "dy": 0,
+        "seconds": 6.033
+      },
+      "groundSpeed": 0
+    }
+  },
+  "bytes": 2808644
+}

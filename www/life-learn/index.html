@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#e2ecef" />
+    <title>人生广场 · 学中文 · Life Plaza Learn</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23f2b544'/%3E%3C/svg%3E" />
+    <meta name="description" content="他们都等过很久，你也许正在等。讲一个你自己的夜晚，当一回导演、画家、郎中、取经人——他们用你的话，陪你亲手做一件礼物。They all waited a long time. Maybe you are waiting too. Live their day, retold in your own words." />
+    <link rel="preload" href="/life-learn/fonts/plaza-serif.woff2" as="font" type="font/woff2" crossorigin />
+    <style>@font-face{font-family:PlazaSerif;src:url(/life-learn/fonts/plaza-serif.woff2)format("woff2");font-weight:200 900;font-display:block}html,body{background:#eef0ea;margin:0}.boot{z-index:10;background:radial-gradient(85% 55% at 24% 16%,#fff7e2f2 0%,#fff7e200 62%),linear-gradient(#dfeaee 0%,#ecefe9 48%,#f7efe1 100%);place-items:center;transition:opacity .9s;display:grid;position:fixed;inset:0;overflow:hidden}.boot:before{content:"";opacity:.28;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.36 0 0 0 0 0.31 0 0 0 0 0.24 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");position:absolute;inset:0}.boot.gone{opacity:0;pointer-events:none}.boot.gone.instant{transition:none}.boot-card{color:#26323b;flex-direction:column;align-items:center;display:flex;position:relative;transform:translateY(-2vh)}.boot-sub{letter-spacing:.56em;text-indent:.56em;color:#6d7c82;font:500 11px/1 Iowan Old Style,Georgia,Times New Roman,serif;transition:opacity .45s}.boot-title{letter-spacing:.34em;text-indent:.34em;margin-top:14px;font-family:PlazaSerif,Songti SC,STSong,Noto Serif SC,Source Han Serif SC,Georgia,serif;font-size:clamp(30px,8.6vw,46px);font-weight:600;line-height:1.1;transition:opacity .45s}.boot-pillow{aspect-ratio:1;width:min(44vw,200px);margin:7.5vh 0 4.6vh;position:relative}.boot-glaze,.boot-sheen,.boot-halo{border-radius:50%;position:absolute}.boot-glaze{background:radial-gradient(circle at 37% 29%,#e6f1ea 0%,#c0d9cc 32%,#a1c2b1 68%,#8a9 100%);inset:0;box-shadow:inset 0 0 0 1.5px #3c60524d,inset 0 12px 24px #ffffff8c,inset 0 -16px 28px #345a4c4d,0 26px 44px -24px #28463c80}.boot-glaze:after{content:"";border-radius:50%;position:absolute;inset:14%;box-shadow:inset 0 7px 15px #385c4e3d,inset 0 -5px 11px #ffffff80}.boot-sheen{inset:0;overflow:hidden}.boot-sheen:before{content:"";background:conic-gradient(#fff0 0deg,#ffffff57 22deg,#fff0 50deg 360deg);animation:12s linear infinite boot-sheen;position:absolute;inset:-32%}.boot-halo{opacity:calc(.08 + var(--p,.06) * .85);pointer-events:none;z-index:1;mix-blend-mode:screen;background:radial-gradient(circle,#ffe4a0b3 0%,#ffe4a000 58%);inset:-26%}.boot-hole{width:46%;height:46%;transform:scale(calc(.13 + var(--p,.06) * .87));will-change:transform;border-radius:50%;position:absolute;top:27%;left:27%}.boot-hole:before{content:"";background:radial-gradient(circle,#4062548c 60%,#40625400 71%);border-radius:50%;position:absolute;inset:-7%}.boot-light{background:radial-gradient(circle,#fffefa 0%,#fff7e0 44%,#fde6ad 68%,#f6c874bf 86%,#f6c87400 100%);border-radius:50%;animation:2.8s ease-in-out infinite boot-breathe;position:absolute;inset:0;box-shadow:0 0 22px 6px #ffdc9680}.boot-flood{pointer-events:none;opacity:0;background:radial-gradient(circle,#fffbf2 0%,#fff7e9 54%,#fff7e900 70%);border-radius:50%;width:300vmax;height:300vmax;margin:-150vmax 0 0 -150vmax;transition:transform 1.25s cubic-bezier(.7,0,.3,1),opacity .25s;position:absolute;top:50%;left:50%;transform:scale(.002)}.boot-hint{letter-spacing:.12em;color:#5d6b72;min-height:1.6em;font-family:Kaiti SC,STKaiti,KaiTi,PlazaSerif,serif;font-size:15px;line-height:1.6;transition:opacity .45s}.boot.open .boot-flood{opacity:1;transform:scale(1)}.boot.open .boot-sub,.boot.open .boot-title,.boot.open .boot-hint{opacity:0}.boot.dark{background:#0b0908}.boot.dark:before,.boot.dark .boot-card{opacity:0}@keyframes boot-breathe{0%,to{opacity:.84;transform:scale(.95)}50%{opacity:1;transform:scale(1.04)}}@keyframes boot-sheen{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.boot-light,.boot-sheen:before{animation:none}}</style>
+    <!-- Life Plaza · Learn: the learner's layer asks the level, then boots the plaza (learn/learn.js). Level control uses the HSK 3.0 syllabus data by Gushi, https://gushichinese.com/hsk-3.0/downloads, CC BY-SA 4.0. -->
+    <link rel="stylesheet" href="/life-learn/learn/learn.css" />
+    <script src="/life-learn/learn/learn.js" data-main="/life-learn/assets/index-D66w_JPd.js"></script>
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/three.core-DtjtRha-.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/three.module-DCgPjWyi.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/gsap-CvDoa17S.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/Pass-CVVF-B1T.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/i18n-BvGoRVq5.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/assets-p2qy6QaX.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/lifecard-Bz8CsM4Y.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/me-CiQWAPxS.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/fonts-BF0KELzc.js">
+    <link rel="modulepreload" crossorigin href="/life-learn/assets/preload-helper-B4-B-RAC.js">
+    <link rel="stylesheet" crossorigin href="/life-learn/assets/lifecard-4j-R9WIN.css">
+    <link rel="stylesheet" crossorigin href="/life-learn/assets/index-C0vHul5t.css">
+  </head>
+  <body>
+    <canvas id="world"></canvas>
+    <div id="ui"></div>
+    <div id="boot" class="boot">
+      <div class="boot-card">
+        <div class="boot-sub" id="boot-sub">LIFE PLAZA</div>
+        <div class="boot-title" id="boot-title">人生广场</div>
+        <div class="boot-pillow" aria-hidden="true">
+          <div class="boot-halo"></div>
+          <div class="boot-glaze"></div>
+          <div class="boot-sheen"></div>
+          <div class="boot-hole"><i class="boot-light"></i></div>
+          <i class="boot-flood"></i>
+        </div>
+        <div class="boot-hint" id="boot-hint">广场的灯正一盏盏亮起来。</div>
+      </div>
+    </div>
+    <script>
+      // The way in speaks the visitor's language before any module runs (src/i18n.js decides the same way), and is dark at
+      // once for someone arriving through the iris from another life (main.js reads and clears that flag).
+      (function () {
+        var norm = function (v) { v = String(v || "").trim().toLowerCase(); return v.indexOf("zh") === 0 ? "zh" : v.indexOf("en") === 0 ? "en" : ""; };
+        var q = new URLSearchParams(location.search), lang = norm(q.get("lang"));
+        if (!lang) { try { lang = norm(localStorage.getItem("lifeplaza.lang")); } catch (e) { /* private mode */ } }
+        if (!lang) { var first = (navigator.languages && navigator.languages[0]) || navigator.language; lang = first ? (norm(first) === "zh" ? "zh" : "en") : "zh"; }
+        var life = (q.get("go") || "plaza") !== "plaza", $ = function (id) { return document.getElementById(id); };
+        if (lang === "en") {
+          document.documentElement.lang = "en";
+          $("boot-sub").textContent = "人 生 广 场";
+          $("boot-title").textContent = "Life Plaza";
+          $("boot-hint").textContent = life ? "The door is opening." : "The plaza's lamps are coming on, one by one.";
+        } else if (life) $("boot-hint").textContent = "门开了。";
+        try { if (sessionStorage.getItem("lp.iris") === "1") $("boot").classList.add("dark"); } catch (e) { /* private mode */ }
+      })();
+    </script>
+  </body>
+</html>

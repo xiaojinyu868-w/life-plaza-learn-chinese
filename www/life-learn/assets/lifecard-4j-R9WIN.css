@@ -1,0 +1,80 @@
+.lifecard-you {
+  font-family: "PlazaSerif", var(--serif);
+  color: #3a2a1c;
+  text-wrap: pretty;
+  line-break: strict;
+  border-left: 2.5px solid #e2a84d;
+  margin: 4px 0 2px;
+  padding-left: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  display: none;
+}
+.lifecard.for-you .lifecard-you {
+  display: block;
+}
+.lifecard.for-you .lifecard-hook {
+  display: none;
+}
+.lifecard-go {
+  color: #fff;
+  letter-spacing: 0.08em;
+  background: linear-gradient(160deg, #f3c56e, #d48f34);
+  padding: 9px 20px 9px 18px;
+  position: relative;
+  box-shadow: 0 10px 22px -12px #965a14e6;
+}
+.lifecard-go:after {
+  content: "";
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  width: 7px;
+  height: 7px;
+  margin-left: 9px;
+  display: inline-block;
+  transform: translateY(-1px) rotate(45deg);
+}
+.lifecard-meta span {
+  white-space: nowrap;
+}
+.lifecard-who {
+  letter-spacing: 0.04em;
+  color: #9a8a7c;
+  margin: -4px 0 6px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.lifecard-who:empty {
+  display: none;
+}
+.lifecard.show img {
+  animation: 0.7s cubic-bezier(0.3, 1.4, 0.5, 1) lifecard-face;
+}
+@keyframes lifecard-face {
+  0% {
+    transform: scale(0.8) rotate(-4deg);
+  }
+  to {
+    transform: none;
+  }
+}
+body.touch .lifecard-you {
+  font-size: 14px;
+  line-height: 1.55;
+}
+body.touch .lifecard-go {
+  padding: 8px 18px 8px 16px;
+}
+#ui:has(.lifecard.show) .act {
+  opacity: 0;
+  pointer-events: none !important;
+}
+body.touch .prompt.show.by-card {
+  opacity: 0;
+  pointer-events: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lifecard.show img {
+    animation: none;
+  }
+}

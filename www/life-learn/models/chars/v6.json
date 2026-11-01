@@ -1,0 +1,89 @@
+{
+  "clips": {
+    "idle": {
+      "preset": "idle",
+      "duration": 15.367,
+      "loop": true,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0,
+        "dy": 0,
+        "seconds": 15.367
+      },
+      "groundSpeed": 0
+    },
+    "walk": {
+      "preset": "walk",
+      "duration": 2.367,
+      "loop": true,
+      "travel": "detrend",
+      "hipTravel": {
+        "dx": -0.0711,
+        "dy": -1.4935,
+        "seconds": 2.367
+      },
+      "groundSpeed": 0.6318
+    },
+    "run": {
+      "preset": "run",
+      "duration": 1.267,
+      "loop": true,
+      "travel": "detrend",
+      "hipTravel": {
+        "dx": 0.0018,
+        "dy": -2.8748,
+        "seconds": 1.267
+      },
+      "groundSpeed": 2.2696
+    },
+    "idle-relax": {
+      "preset": "standing_relax",
+      "duration": 17.6,
+      "loop": true,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0,
+        "dy": 0.0008,
+        "seconds": 17.6
+      },
+      "groundSpeed": 0
+    },
+    "look-around": {
+      "preset": "look_around",
+      "duration": 15.6,
+      "loop": true,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": 0.0018,
+        "dy": 0.0045,
+        "seconds": 15.6
+      },
+      "groundSpeed": 0
+    },
+    "wave": {
+      "preset": "wave_goodbye_02",
+      "duration": 5.9,
+      "loop": false,
+      "travel": "pin",
+      "hipTravel": {
+        "dx": 0.3869,
+        "dy": -1.1038,
+        "seconds": 5.9
+      },
+      "groundSpeed": 0
+    },
+    "laugh": {
+      "preset": "laugh_01",
+      "duration": 5.6,
+      "loop": false,
+      "travel": "keep",
+      "hipTravel": {
+        "dx": -0.0002,
+        "dy": -0.0005,
+        "seconds": 5.6
+      },
+      "groundSpeed": 0
+    }
+  },
+  "bytes": 2035372
+}

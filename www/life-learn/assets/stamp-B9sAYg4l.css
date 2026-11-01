@@ -1,0 +1,96 @@
+.tape-stamp {
+  z-index: 25;
+  opacity: 0;
+  letter-spacing: 0.08em;
+  color: #fff6e6;
+  text-shadow:
+    -1px 0 #ff46468c,
+    1px 0 #4678ff8c,
+    0 0 6px #ffd6a08c;
+  font:
+    600 24px/1.2 ui-monospace,
+    SF Mono,
+    Roboto Mono,
+    Menlo,
+    Consolas,
+    Courier New,
+    monospace;
+  transition: opacity 0.6s;
+  position: fixed;
+  inset: 0;
+  pointer-events: none !important;
+}
+.tape-stamp.on {
+  opacity: 1;
+  transition: opacity 80ms linear;
+}
+.tape-stamp b {
+  font-weight: inherit;
+  white-space: pre;
+  position: absolute;
+}
+.tape-play {
+  left: calc(28px + env(safe-area-inset-left));
+  top: calc(26px + env(safe-area-inset-top));
+}
+.tape-date {
+  left: calc(28px + env(safe-area-inset-left));
+  bottom: calc(30px + env(safe-area-inset-bottom));
+}
+.tape-band {
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: repeating-linear-gradient(#fff6e657 0 3px, #2a24331f 3px 6px, #fff6e633 6px 9px);
+  height: 9px;
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 10px #fff6e640;
+}
+.tape-stamp.on .tape-band {
+  animation: 0.4s linear forwards tape-track;
+}
+@keyframes tape-track {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  92% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(calc(100vh + 24px));
+  }
+}
+@media (width<=640px), (pointer: coarse) {
+  .tape-stamp {
+    font-size: 20px;
+  }
+  .tape-play {
+    left: calc(20px + env(safe-area-inset-left));
+    top: calc(20px + env(safe-area-inset-top));
+  }
+  .tape-date {
+    left: calc(20px + env(safe-area-inset-left));
+    bottom: calc(22px + env(safe-area-inset-bottom));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tape-stamp.on .tape-band {
+    animation: none;
+  }
+}
+.tape-type {
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  font-family:
+    ui-monospace,
+    SF Mono,
+    Roboto Mono,
+    Menlo,
+    Consolas,
+    Courier New,
+    monospace;
+}

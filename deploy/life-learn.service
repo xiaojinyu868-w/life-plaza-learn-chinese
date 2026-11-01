@@ -1,0 +1,19 @@
+[Unit]
+Description=Life Plaza Learn API (capture.meetmind.online/life-learn/api) — the Chinese-learning branch of Life Plaza
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/life-learn
+EnvironmentFile=/etc/life-learn/runtime.env
+Environment=PORT=8794
+Environment=LIFE_DATA_DIR=/srv/life-learn/data
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/env node server/index.mjs
+Restart=always
+RestartSec=3
+MemoryMax=700M
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

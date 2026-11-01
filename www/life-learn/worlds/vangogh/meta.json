@@ -1,0 +1,11 @@
+{
+ "id": "44839a49-d1db-4b5c-a545-a1a383650b26",
+ "space": "vangogh",
+ "metricScale": 1.0921599,
+ "groundOffset": 1.1687891,
+ "spz": "world-low.spz",
+ "low": "world-low.spz",
+ "source": "Vincent van Gogh, The Bedroom (1888), Van Gogh Museum, Amsterdam — public domain",
+ "model": "marble-1.1",
+ "marbleUrl": "https://marble.worldlabs.ai/world/44839a49-d1db-4b5c-a545-a1a383650b26"
+}

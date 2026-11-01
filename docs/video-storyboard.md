@@ -1,0 +1,25 @@
+# 宣传片分镜（人生广场 · 学中文）
+
+由 `video/make.py` 生成。成片：`video/out/life-plaza-learn-film.mp4`，字幕：`video/out/life-plaza-learn-film.srt`。
+背景画面来自原版宣传片（真机录制）；叠加的是教学版界面截图（`video/shots.mjs`，台词是测试时人物真实说出的话）。用有显卡的设备重录时，照这张表的顺序和旁白录即可。
+
+| # | 时间 | 旁白（中文） | 字幕（英文） | 画面 | 叠加的界面 |
+|---|---|---|---|---|---|
+| 1 | 0:00:00.30–0:00:03.35 | 人生广场，学中文。 | Life Plaza — learn Chinese. | 原片 26s 起 5s | — |
+| 2 | 0:00:03.80–0:00:10.39 | 学中文最难的，不是记住一个词，而是找到一个想开口的理由。 | The hardest part of learning Chinese isn't remembering words — it's finding a reason to speak. | 原片 20s 起 8s | — |
+| 3 | 0:00:10.84–0:00:17.67 | 在人生广场，学习者走进别人的人生，用中文和那里的人聊天。 | In Life Plaza, learners walk into other people's lives and chat in Chinese with the people there. | 原片 97s 起 6s | — |
+| 4 | 0:00:18.12–0:00:27.26 | 进门先选水平。难度由 HSK 3.0 大纲控制，每个人物都照你的等级说话。 | First, choose your level. Difficulty follows the HSK 3.0 syllabus — every character speaks at your level. | 选级页截图 | — |
+| 5 | 0:00:27.71–0:00:36.06 | 门口的引路人，当过二十年深夜电台主持人。她会问你：为什么学中文？喜欢什么？ | At the gate, a former late-night radio host asks: why are you learning Chinese? What do you love? | 原片 4s 起 12s | cap-guide.png |
+| 6 | 0:00:36.51–0:00:40.46 | 你说喜欢画画，她就送你去梵高的屋子。 | Say you love painting, and she sends you to Van Gogh's room. | 原片 44s 起 4s | — |
+| 7 | 0:00:40.91–0:00:50.94 | 梵高说：请你把窗户打开。你推开窗，他会说：你把窗户打开了。听懂了，就去做。 | Van Gogh says: please open the window. You open it, and he says: you opened the window. Understand it — then do it. | 原片 48s 起 8s | cap-vg-tpr.png、cap-vg-window.png |
+| 8 | 0:00:51.39–0:00:59.33 | 他说的每一句话，都配着拼音和英文；超出你水平的新词，会用橙色标出来。 | Every line comes with pinyin and English; words above your level are marked in orange. | 原片 50.0s 定格推近 | cap-vg-window.png |
+| 9 | 0:00:59.78–0:01:09.16 | 点一下生词，就能看到它的等级、例句和发音，还有一条词汇链，告诉你下一步可以学什么。 | Tap a new word to see its level, an example and how it sounds — plus a word chain of what to learn next. | 原片 52.5s 定格推近 | cap-vg-tci.png、card-huangse.png |
+| 10 | 0:01:09.61–0:01:19.08 | 他会循环提问：你喜欢黄色还是红色？一次只教一个新词，用的都是屋子里看得见的东西。 | He asks circling questions — do you like yellow or red? One new word at a time, using things you can see in the room. | 原片 49.0s 定格推近 | cap-vg-tci.png |
+| 11 | 0:01:19.53–0:01:27.95 | 问他：把门打开和门打开了，有什么不一样？他不讲语法术语，只用一个例子回答你。 | Ask him how 把门打开 differs from 门打开了 — no grammar terms, just one example. | 原片 54.0s 定格推近 | cap-vg-grammar.png |
+| 12 | 0:01:28.40–0:01:35.38 | 你写错了，系统只给一到两条建议，带着拼音，让你自己再写一遍。 | Make a mistake, and you get one or two suggestions with pinyin — then you write it again yourself. | 原片 51.0s 定格推近 | fix.png、fix-done.png |
+| 13 | 0:01:35.83–0:01:40.34 | 喜欢电影和拍照的人，可以去梅里爱的片场。 | If you love film and photography, visit Méliès's studio. | 原片 32s 起 8s | cap-melies.png |
+| 14 | 0:01:40.79–0:01:48.25 | 对中医感兴趣，就去找李时珍：用手机闪光灯测心跳，他给你号脉、开方子。 | Curious about Chinese medicine? Li Shizhen reads your pulse — measured with your phone's flash — and writes you a prescription. | 原片 58s 起 12s | cap-lishizhen.png |
+| 15 | 0:01:48.70–0:01:52.73 | 小朋友可以去五行山，把孙悟空救出来。 | Children can climb the Five Elements Mountain and set the Monkey King free. | 原片 74s 起 8s | cap-xiyou.png |
+| 16 | 0:01:53.18–0:02:00.57 | 每个来过的人，都会留下一段自己的日子，变成下一个人可以玩的小游戏。 | Everyone who visits leaves a piece of their own life behind — a small game for the next person. | 原片 85s 起 10s | — |
+| 17 | 0:02:01.02–0:02:08.57 | 别的产品，剧本写在你来之前；人生广场的剧本，写在你开口之后。 | Other products write the script before you arrive. Life Plaza writes it after you speak. | 原片 108s 起 8s | — |
+| 18 | 0:02:09.02–0:02:12.07 | 人生广场，学中文。 | Life Plaza · Learn Chinese | 选级页截图 | — |

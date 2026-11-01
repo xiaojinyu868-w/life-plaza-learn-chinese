@@ -1,0 +1,313 @@
+.framein figcaption .vg-role {
+  letter-spacing: 0.14em;
+  margin-bottom: 4px;
+  font:
+    700 22px/1.3 PlazaSerif,
+    Noto Serif SC,
+    Songti SC,
+    serif;
+  display: block;
+}
+.framein figcaption small {
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+  font-size: 11px;
+  display: block;
+}
+.framein figcaption .vg-pillow {
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  font-style: normal;
+  display: block;
+}
+.framein figcaption .vg-pillow small {
+  margin-top: 2px;
+}
+.vg-palette {
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 4;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.25, 1.05);
+  display: flex;
+  position: fixed;
+  transform: translate(-50%, 140%);
+  pointer-events: none !important;
+}
+.vg-palette.show {
+  transform: translate(-50%);
+}
+.vg-palette.show * {
+  pointer-events: auto;
+}
+.vg-board {
+  background:
+    radial-gradient(circle at 22px, #28180ae0 0 11px, #0000 12px),
+    repeating-linear-gradient(100deg, #ffffff0d 0 3px, #0000 3px 11px),
+    linear-gradient(160deg, #d9b27a, #b98a52 55%, #9c6f3f);
+  border-radius: 46% 54% 50% 50%/60% 58% 42% 40%;
+  gap: 10px;
+  padding: 14px 18px 14px 46px;
+  display: flex;
+  position: relative;
+  box-shadow:
+    0 14px 34px -12px #1e1006bf,
+    inset 0 2px #ffecc880,
+    inset 0 -3px 8px #46280f59;
+}
+.vg-dab {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  opacity: 0;
+  -webkit-tap-highlight-color: transparent;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 92px;
+  font-family:
+    Kaiti SC,
+    STKaiti,
+    KaiTi,
+    Georgia,
+    serif;
+  transition:
+    transform 0.45s cubic-bezier(0.3, 1.6, 0.4, 1),
+    opacity 0.3s;
+  display: flex;
+  transform: scale(0.4) translateY(10px);
+}
+.vg-dab.in {
+  opacity: 1;
+  transform: none;
+}
+.vg-dab i {
+  background:
+    radial-gradient(circle at 34% 30%, #ffffff8c 0 5px, transparent 9px),
+    radial-gradient(ellipse at 60% 70%, #00000040, transparent 60%), var(--c);
+  border-radius: 52% 48% 55% 45%/58% 50% 50% 42%;
+  width: 50px;
+  height: 42px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.25s;
+  display: block;
+  box-shadow:
+    0 3px #0000002e,
+    inset 0 -4px 6px #00000038;
+}
+.vg-dab b {
+  color: #2b1d10;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.vg-dab span {
+  color: #4a3220;
+  text-align: center;
+  overflow-wrap: anywhere;
+  max-width: 92px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+.vg-dab.on i {
+  box-shadow:
+    0 0 0 3px #fff6dc,
+    0 0 0 5px var(--c),
+    0 8px 18px -4px #00000073;
+  transform: translateY(-4px) scale(1.08);
+}
+.vg-dab.on b {
+  color: #120b04;
+}
+.vg-palette.choosing .vg-dab.in i {
+  animation: 1.8s ease-in-out infinite vg-dab-breathe;
+}
+.vg-palette.choosing .vg-dab.in:nth-child(2) i {
+  animation-delay: 0.3s;
+}
+.vg-palette.choosing .vg-dab.in:nth-child(3) i {
+  animation-delay: 0.6s;
+}
+@keyframes vg-dab-breathe {
+  50% {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow:
+      0 0 0 4px #fff6dcbf,
+      0 8px 16px -6px #0006;
+  }
+}
+.vg-palette.chosen .vg-dab:not(.on) {
+  opacity: 0.42;
+  transform: scale(0.9);
+}
+body.touch.vg-reading .subtitle {
+  bottom: calc(18px + env(safe-area-inset-bottom));
+}
+body.vg-painting .subtitle {
+  bottom: calc(212px + env(safe-area-inset-bottom));
+}
+body.touch.vg-painting .subtitle {
+  bottom: calc(206px + env(safe-area-inset-bottom));
+}
+.vg-tap {
+  z-index: 0;
+  touch-action: none;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.35s;
+  position: fixed;
+  inset: 0;
+  pointer-events: auto !important;
+}
+.vg-tap.show {
+  opacity: 1;
+}
+.vg-tap.done {
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none !important;
+}
+.vg-tap .vg-ring b {
+  animation: 1.3s ease-in-out infinite vg-tap-pulse;
+}
+.vg-tap.done .vg-ring {
+  animation: 0.5s ease-out forwards vg-ring-pop;
+}
+@keyframes vg-tap-pulse {
+  50% {
+    transform: scale(1.3);
+    box-shadow: 0 0 30px 12px #ffdc788c;
+  }
+}
+.vg-tap > span {
+  left: 50%;
+  bottom: calc(150px + env(safe-area-inset-bottom));
+  white-space: nowrap;
+  color: #3a2e28;
+  letter-spacing: 0.08em;
+  background: #fbf6eef0;
+  border: 1px solid #e6d8c4;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font:
+    600 14px/1.3 PingFang SC,
+    Microsoft YaHei,
+    sans-serif;
+  position: fixed;
+  transform: translate(-50%);
+  box-shadow: 0 6px 20px #3e354629;
+  pointer-events: none !important;
+}
+.vg-hold {
+  z-index: 0;
+  touch-action: none;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  position: fixed;
+  inset: 0;
+  pointer-events: auto !important;
+}
+.vg-hold.show {
+  opacity: 1;
+}
+.vg-hold.done {
+  opacity: 0;
+  transition: opacity 0.6s 0.15s;
+  pointer-events: none !important;
+}
+.vg-ring {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none !important;
+}
+.vg-ring.free {
+  top: 42%;
+  left: 50%;
+}
+.vg-ring svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(-90deg);
+}
+.vg-ring circle {
+  fill: none;
+  stroke-width: 6px;
+}
+.vg-ring .bg {
+  stroke: #fff8e48c;
+  transform-origin: 50%;
+  animation: 1.6s ease-in-out infinite vg-ring-breathe;
+}
+.vg-ring .fg {
+  stroke: #ffd65a;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px #ffd25ae6);
+}
+.vg-ring b {
+  background: #fff4d299;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  position: absolute;
+  inset: 30px;
+  box-shadow: 0 0 22px 8px #ffdc7873;
+}
+.vg-hold.down .vg-ring b {
+  transform: scale(1.35);
+}
+.vg-hold.done .vg-ring {
+  animation: 0.6s ease-out forwards vg-ring-pop;
+}
+@keyframes vg-ring-breathe {
+  50% {
+    stroke: #fff8e4e6;
+    transform: scale(1.12);
+  }
+}
+@keyframes vg-ring-pop {
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+.vg-hold > span {
+  left: 50%;
+  bottom: calc(150px + env(safe-area-inset-bottom));
+  white-space: nowrap;
+  color: #3a2e28;
+  letter-spacing: 0.08em;
+  background: #fbf6eef0;
+  border: 1px solid #e6d8c4;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font:
+    600 14px/1.3 PingFang SC,
+    Microsoft YaHei,
+    sans-serif;
+  position: fixed;
+  transform: translate(-50%);
+  box-shadow: 0 6px 20px #3e354629;
+  pointer-events: none !important;
+}
+@media (width<=420px) {
+  .vg-board {
+    gap: 4px;
+    padding: 12px 12px 12px 40px;
+  }
+  .vg-dab {
+    width: 84px;
+  }
+  .vg-dab span {
+    max-width: 84px;
+  }
+}

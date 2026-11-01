@@ -1,0 +1,23 @@
+{
+  "name": "life-plaza-learn-chinese",
+  "version": "1.0.0",
+  "description": "人生广场 · 学中文：走进梵高、梅里爱、李时珍、孙悟空的一段人生，按 HSK 3.0 分级和他们用中文实时对话",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "start": "node --env-file=.env scripts/dev.mjs",
+    "api": "node --env-file=.env server/index.mjs",
+    "test:api": "node test/api.mjs 3",
+    "test:layer": "node test/layer.mjs"
+  },
+  "dependencies": {
+    "pinyin-pro": "^3.29.5",
+    "playwright": "1.63.0",
+    "sharp": "^0.34.0",
+    "ws": "^8.18.0"
+  }
+}

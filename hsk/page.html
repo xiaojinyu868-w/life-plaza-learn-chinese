@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ── THE SMART APP BANNER ──────────────────────────────────────────────────
+     Safari on iOS reads this one line and draws its own strip at the top of
+     the page offering the app — "View" before it is installed, "Open" after,
+     and a close button that Safari remembers. Nothing to style, nothing to
+     dismiss twice, and no other browser is affected because no other browser
+     reads it.
+
+     The id is not typed here: `APPLE_APP_ID` is cut out of `APP_STORE_URL` in
+     build-web.mjs, so the store link and the banner cannot name two different
+     apps, and both go quiet together if the link is ever emptied the way
+     PLAY_STORE_URL is. -->
+<meta name="apple-itunes-app" content="app-id=6799015237">
+
+<!-- ── AN AUTH LINK'S FIRST STOP, WHICH IS NOT MEANT TO BE THIS PAGE ────────
+     *"the forget password and then reset password link in the mail doesnt
+     work."* This is the half of that fix which does not need anybody's
+     dashboard.
+
+     WHAT HAPPENS: Supabase Auth mails a link to its own `/auth/v1/verify`. It
+     checks the token, then forwards the browser to the `redirect_to` the
+     request asked for — but ONLY if that URL is on the allow-list configured
+     under Authentication -> URL Configuration. Nothing of this project's is on
+     it (probed on 2026-09-12: the learning platform, the teaching platform and
+     the dev origin all come back rejected), and a rejected redirect is not an
+     error. It silently becomes the project's SITE URL, which is this site.
+
+     So a learner resetting their password arrives at the marketing home page
+     with `#access_token=…&type=recovery` in the address bar, on a document that
+     has no idea what to do with it. Nothing looks broken; nothing works.
+
+     WHAT THIS DOES: hands the arrival on, to the host whose code knows the
+     shape. The tokens are in the FRAGMENT, which never leaves the browser — no
+     server sees them, and this page does not read them. It copies the fragment
+     to a hardcoded origin and leaves; there is no value from the URL in that
+     destination, so it cannot be turned into an open redirect. The address is
+     scrubbed from this origin's history first, because a refresh token has no
+     business sitting in a Back button.
+
+     `?code=` travels too. That is the PKCE return from Apple or Google, which
+     is the same door with the same allow-list problem — and the verifier it
+     needs is in the learning platform's own sessionStorage, so it can only be
+     completed there.
+
+     IT IS A STUB AND IT SHOULD BE DELETED. Three entries on the allow-list
+     make it unreachable: Auth would then send the browser straight to the
+     learning platform and this branch would never run again. It is also the
+     only thing that cannot be right if the TEACHING platform ever mails a link
+     of its own — the fragment does not say which product asked for it, and
+     this guesses the learner.
+
+     IT DOES NOW (2026-09-24), so the platform says so in the QUERY. Its links
+     ask for `https://gushichinese.com/?for=platform`, which the allow-list
+     accepts, and `for=platform` is the one word read here: it picks the other of
+     two HARDCODED origins, so there is still nothing in the URL that can name a
+     destination. Anything else, or nothing, is the learner as before. -->
+<script>
+(function () {
+  var hash = location.hash.slice(1);
+  var query = location.search.slice(1);
+  if (!/(^|&)(access_token|error_code|error_description)=/.test(hash)
+      && !/(^|&)code=/.test(query)) return;
+  var teacher = /(^|&)for=platform(&|$)/.test(query);
+  query = query.replace(/(^|&)for=platform(?=&|$)/, '').replace(/^&/, '');
+  /* Development runs all three hosts off one port, so the destination follows
+     the host it was reached on rather than being one hardcoded string that is
+     wrong on a laptop. */
+  var dev = /(^|\.)localhost$/.test(location.hostname);
+  var to = dev
+    ? location.protocol + (teacher ? '//platform.localhost' : '//learn.localhost')
+      + (location.port ? ':' + location.port : '') + '/'
+    : (teacher ? 'https://platform.gushichinese.com/' : 'https://learn.gushichinese.com/');
+  try { history.replaceState(null, '', location.pathname); } catch (e) { /* old browser, keep going */ }
+  location.replace(to + (query ? '?' + query : '') + (hash ? '#' + hash : ''));
+})();
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────────────────
+     Rendered by tools/build-web.mjs from apps/web/pages + apps/web/copy.mjs.
+     DO NOT EDIT THE FILE IN dist/ — it is overwritten on every build. Change
+     the words in copy.mjs and the structure in pages/.
+
+     Every language is real, separately rendered HTML at its own URL, so every
+     page here is fully readable and indexable with JavaScript blocked.
+     robots.txt names sixteen AI crawlers by hand and most of them do not run
+     JS; that is the whole reason this is a build step and not a runtime swap.
+     ──────────────────────────────────────────────────────────────────────── -->
+
+<title>HSK 3.0 词表下载：免费 CSV 与 JSON</title>
+<meta name="description" content="全部 11,000 个 HSK 3.0 词、3,088 个认读字和 428 个语法点，免费的 CSV 和 JSON 文件，分级或整份：拼音、声调数字、英文释义、例句，以及每个词的录音。CC BY-SA 4.0，无需注册。">
+<link rel="canonical" href="https://gushichinese.com/zh/hsk-3.0/downloads">
+<!-- NOINDEX only on a page that is part of selling on the web, while the
+     switch for that is off (tools/build-web.mjs, `cancel` in PAGES). -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<!-- Only the languages this page genuinely has. /privacy is English-only by
+     design, and an hreflang="de" pointing at an English document is an error,
+     not a courtesy. Built from the page's own URL list in build-web.mjs, so a
+     page cannot claim a translation that was never written. -->
+<link rel="alternate" hreflang="en" href="https://gushichinese.com/hsk-3.0/downloads">
+<link rel="alternate" hreflang="es" href="https://gushichinese.com/es/hsk-3.0/downloads">
+<link rel="alternate" hreflang="fr" href="https://gushichinese.com/fr/hsk-3.0/downloads">
+<link rel="alternate" hreflang="de" href="https://gushichinese.com/de/hsk-3.0/downloads">
+<link rel="alternate" hreflang="zh-Hans" href="https://gushichinese.com/zh/hsk-3.0/downloads">
+<link rel="alternate" hreflang="x-default" href="https://gushichinese.com/hsk-3.0/downloads">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gushi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="HSK 3.0 大纲，做成文件">
+<meta property="og:description" content="词、汉字和语法，CSV 与 JSON 格式。分级下载或整份下载，CC BY-SA 4.0，无需注册。">
+<meta property="og:url" content="https://gushichinese.com/zh/hsk-3.0/downloads">
+<!-- The share card is the door: a 1200x630 capture of / in the reader's own
+     language, made by tools/og-card.mjs and committed to public/assets. It is
+     a picture of this site rather than a phone mockup, because that is what a
+     link to Gushi should look like sitting in a chat window.
+     REGENERATE IT WHEN THE DOOR CHANGES — nothing in the build checks that the
+     card still matches the page, so it will otherwise go on advertising a
+     homepage that no longer exists. -->
+<meta property="og:image" content="https://gushichinese.com/assets/og-door-zh.jpg?v=d1fcb2ec25">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HSK 3.0 大纲，做成文件">
+<meta name="twitter:description" content="词、汉字和语法，CSV 与 JSON 格式。分级下载或整份下载，CC BY-SA 4.0，无需注册。">
+<meta name="twitter:image" content="https://gushichinese.com/assets/og-door-zh.jpg?v=d1fcb2ec25">
+
+<!-- The site is light by default and dark when the reader asks for it, so a
+     single theme-color would be wrong half the time.
+     THE LIGHT ONE IS PER PAGE. /app, /teaching and /hsk-3.0 open on the ink
+     wash and now keep it in a fixed band at the top of the window (see THE
+     BRAND EDGE in site.css), so on a phone the browser's own bar sits directly
+     on that colour — cream there would be a seam across the top of the screen.
+     Every other page opens on paper and stays #F4F1E9. Set in build-web.mjs. -->
+<meta name="theme-color" content="#F4F1E9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15140F" media="(prefers-color-scheme: dark)">
+
+<!-- REAL FILES, NOT A data: URI, AND THAT IS THE WHOLE POINT OF THE CHANGE.
+     What was here was an SVG in a data URI — two serif glyphs on a red square,
+     no request, drew fine in a tab. Google showed the generic globe next to
+     every result for this site anyway: it only shows a favicon it can CRAWL,
+     and a data URI has no address to fetch. /favicon.ico, the address it falls
+     back to, was a 404. The files are generated from the APP's icon by
+     tools/favicon.mjs, so the tab, the home screen and the App Store carry one
+     mark and not three. -->
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+<!-- Two links, not an @import: @import costs a serial round trip before
+     anything can paint. tokens.css must come first — site.css reads its
+     custom properties and inherits nothing else from it. -->
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/site.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": "https://gushichinese.com/#org", "name": "Gushi", "url": "https://gushichinese.com/", "email": "hello@gushichinese.com" },
+    { "@type": "BreadcrumbList", "@id": "https://gushichinese.com/zh/hsk-3.0/downloads#crumbs", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Gushi", "item": "https://gushichinese.com/zh/" },
+      { "@type": "ListItem", "position": 2, "name": "HSK 3.0", "item": "https://gushichinese.com/zh/hsk-3.0" },
+      { "@type": "ListItem", "position": 3, "name": "下载", "item": "https://gushichinese.com/zh/hsk-3.0/downloads" }
+    ] },
+    { "@type": "Dataset", "@id": "https://gushichinese.com/zh/hsk-3.0/downloads#data",
+      "name": "HSK 3.0 大纲：词、汉字与语法", "description": "全部 11,000 个 HSK 3.0 词、3,088 个认读字和 428 个语法点，免费的 CSV 和 JSON 文件，分级或整份：拼音、声调数字、英文释义、例句，以及每个词的录音。CC BY-SA 4.0，无需注册。",
+      "url": "https://gushichinese.com/zh/hsk-3.0/downloads", "inLanguage": "en",
+      "dateModified": "2026-10-14",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "keywords": ["HSK 3.0", "HSK vocabulary list", "Chinese characters", "pinyin", "Chinese grammar", "Mandarin"],
+      "creator": { "@id": "https://gushichinese.com/#org" },
+      "isPartOf": { "@id": "https://gushichinese.com/zh/hsk-3.0#article" },
+      "distribution": [
+        { "@type": "DataDownload", "name": "词表 (CSV)", "encodingFormat": "text/csv", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-words-all.csv" },
+        { "@type": "DataDownload", "name": "词表 (JSON)", "encodingFormat": "application/json", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-words-all.json" },
+        { "@type": "DataDownload", "name": "汉字表 (CSV)", "encodingFormat": "text/csv", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-characters-all.csv" },
+        { "@type": "DataDownload", "name": "汉字表 (JSON)", "encodingFormat": "application/json", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-characters-all.json" },
+        { "@type": "DataDownload", "name": "语法大纲 (CSV)", "encodingFormat": "text/csv", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-grammar-all.csv" },
+        { "@type": "DataDownload", "name": "语法大纲 (JSON)", "encodingFormat": "application/json", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-grammar-all.json" },
+        { "@type": "DataDownload", "name": "全部内容，一个 JSON 文件", "encodingFormat": "application/json", "contentUrl": "https://gushichinese.com/hsk-3.0/downloads/hsk-3.0-complete.json" }
+      ] }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳至正文</a>
+
+<!-- The same four entries on every page, in every language. No dropdown, no
+     hamburger, no login button. On a phone this wraps to two rows (see the
+     ≤640px block in site.css) rather than hiding behind a menu: three links do
+     not need one, and a menu is one more tap between a teacher and the page.
+
+     "Teaching Platform" IS a copy key, and it was not always: it used to be a
+     literal here on the reasoning that a product name is identical in every
+     language. Chinese is the language where that stopped being true. A native
+     reader on the Chinese site meets one Latin phrase in an otherwise Chinese
+     bar, and it reads as a page half-translated rather than as a name — so zh
+     says 教学平台 and de/en still say "Teaching Platform", from `nav.teaching`
+     in copy.mjs. Changing that key changes the name in the bar, the footer and
+     nowhere else; the prose keys carry their own copy of it. -->
+<header class="bar">
+  <div class="bar-in">
+    <a class="logo" href="/zh/" data-en="/" data-es="/es/" data-fr="/fr/" data-de="/de/" data-zh="/zh/" aria-label="Gushi 首页">
+      <span class="chop" aria-hidden="true"><span>故<br>事</span></span>
+      <span class="brand">Gushi</span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="/zh/app" data-en="/app" data-es="/es/app" data-fr="/fr/app" data-de="/de/app" data-zh="/zh/app">App</a>
+      <a href="/zh/teaching" data-en="/teaching" data-es="/es/teaching" data-fr="/fr/teaching" data-de="/de/teaching" data-zh="/zh/teaching">教学平台</a>
+      <a href="/zh/hsk-3.0" data-en="/hsk-3.0" data-es="/es/hsk-3.0" data-fr="/fr/hsk-3.0" data-de="/de/hsk-3.0" data-zh="/zh/hsk-3.0">HSK 3.0</a>
+    </nav>
+    <!-- The search, on every page that has this bar (owner, 2026-10-05: "the
+         nav bar the whole time, with the search bar also there together in
+         any link"). The door has no bar and carries its own, larger. -->
+    <div class="bar-search"><!-- THE GUSHI SEARCH BAR (assets/search.js): the door's and the lookup page's.
+     A GET to /lookup that works without the script; with it, the matches
+     open under the bar as you type, each a link to its own page. -->
+<form class="gsearch" id="gs" action="/zh/lookup" method="get" role="search" data-gsearch
+      data-lang="zh" data-hsk="HSK {1} 级" data-char="汉字" data-word="词语"
+      data-all="查看“{1}”的全部结果" data-none="没有找到“{1}”。" data-try="商|xuéxí|学习|你好|中国"
+      data-short="汉字或词语…">
+  <span class="gs-seal" aria-hidden="true" lang="zh-Hans">查</span>
+  <label class="sr-only" for="gs-q">查汉字或词语</label>
+  <input id="gs-q" name="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
+         placeholder="输入汉字或词语…" role="combobox" aria-autocomplete="list"
+         aria-expanded="false" aria-controls="gs-list">
+  <button type="submit"><span>查询</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5"/></svg></button>
+  <div class="gs-pop" hidden>
+    <ul id="gs-list" role="listbox" aria-label="查汉字或词语"></ul>
+    <a class="gs-all" href="/zh/lookup"><span></span><kbd>↵</kbd></a>
+  </div>
+</form>
+</div>
+    <span class="lang"><!-- The language switcher's links, without the wrapper: /  puts them in
+     `.door-lang` and every other page in `.lang`, and the two are positioned
+     differently but say exactly the same thing. One copy, so a language cannot
+     be added to the door and forgotten on the bar.
+
+     `data-lang` carries the SHORT code and `hreflang` the full tag. They are
+     different on purpose: `zh-Hans` is the honest claim to a search engine,
+     and `zh` is the key site.js stores and the suffix on the data-* attribute
+     it rewrites hrefs from. Reusing the tag for both would mean shipping
+     `data-zh-Hans` attributes on every link on the site.
+
+     Built in tools/build-web.mjs from LOCALES; the order here is that table's
+     order. -->
+<a href="/hsk-3.0/downloads" lang="en" hreflang="en" data-lang="en">EN</a><i aria-hidden="true">|</i><a href="/es/hsk-3.0/downloads" lang="es" hreflang="es" data-lang="es">ES</a><i aria-hidden="true">|</i><a href="/fr/hsk-3.0/downloads" lang="fr" hreflang="fr" data-lang="fr">FR</a><i aria-hidden="true">|</i><a href="/de/hsk-3.0/downloads" lang="de" hreflang="de" data-lang="de">DE</a><i aria-hidden="true">|</i><a href="/zh/hsk-3.0/downloads" lang="zh-Hans" hreflang="zh-Hans" data-lang="zh" aria-current="true">中文</a>
+</span>
+  </div>
+</header>
+<script type="module" src="/assets/search.js"></script>
+
+<main id="main" tabindex="-1">
+<!-- One per language this page is NOT in. site.js unhides at most one of
+     them, and only when a stored preference disagrees with the page you are
+     on. It offers; it never redirects.
+
+     Each note is written in the language it offers, and carries `lang` to say
+     so — otherwise a screen reader on the English page reads the Chinese
+     sentence with an English voice. -->
+<p class="wrap fine" data-lang-note="en" lang="en" hidden style="padding-top:12px">This page is also available in English. <a href="/hsk-3.0/downloads">Read in English →</a></p>
+<p class="wrap fine" data-lang-note="es" lang="es" hidden style="padding-top:12px">Esta página también está disponible en español. <a href="/es/hsk-3.0/downloads">Leer en español →</a></p>
+<p class="wrap fine" data-lang-note="fr" lang="fr" hidden style="padding-top:12px">Cette page est aussi disponible en français. <a href="/fr/hsk-3.0/downloads">Lire en français →</a></p>
+<p class="wrap fine" data-lang-note="de" lang="de" hidden style="padding-top:12px">Diese Seite gibt es auch auf Deutsch. <a href="/de/hsk-3.0/downloads">Auf Deutsch lesen →</a></p>
+
+
+
+
+<!-- ─────────────────────────────────────────────────────────────────────────
+     /hsk-3.0/downloads — the syllabus as files.
+
+     THIS PAGE IS NOT A LEAD MAGNET AND MUST NOT BECOME ONE. No email field, no
+     account, no "sign up to unlock the other eight levels". The reason the
+     files exist is that a source somebody can take away is a source somebody
+     links to, and a gate is exactly the thing that stops a forum post, a
+     GitHub repo or an answer engine from citing it. If a form ever appears
+     between a reader and a CSV here, the asset has been turned back into a
+     page and the point of the whole exercise is gone.
+
+     THE LICENCE IS THE ASK. CC BY-SA 4.0 costs us nothing we were keeping and
+     it makes the link back a condition rather than a hope. That is the entire
+     business case for giving away the thing the site is otherwise built on.
+     Share-alike rather than plain CC BY because the English meanings are
+     adapted from CC-CEDICT, which is BY-SA itself — the long note at the top of
+     tools/build-downloads.mjs has the reasoning.
+
+     Everything on the page is rendered from the manifest that
+     tools/build-downloads.mjs returns when it writes the files, so a row here
+     cannot advertise a file that was not produced.
+     ──────────────────────────────────────────────────────────────────────── -->
+
+<div class="doc">
+  <section class="row row--hero">
+    <div class="col">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/" data-en="/" data-es="/es/" data-fr="/fr/" data-de="/de/" data-zh="/zh/">Gushi</a> ›
+        <a href="/zh/hsk-3.0" data-en="/hsk-3.0" data-es="/es/hsk-3.0" data-fr="/fr/hsk-3.0" data-de="/de/hsk-3.0" data-zh="/zh/hsk-3.0">HSK 3.0</a> › 下载</nav>
+      <h1>HSK 3.0 大纲，做成文件</h1>
+      <p class="lead">本站发布的一切，都做成可以带走的格式：11,000 个词、3,088 个认读字、428 个语法点——按等级下载，或者整份装进一个文件。</p>
+      <p class="body">每一行都包含这个词、带声调符号的拼音、每个音节的声调数字、英文释义、一个中文例句连同它的拼音和英文，以及这个词的录音地址。最后这一列是别的已发布词表都没有的：13,390 段录音，可以自由播放。</p><p class="body">两种格式。CSV 可以用 Excel、Numbers、Sheets 打开，任何能读表格的软件都行。JSON 把许可协议、数据来源和每一列的说明都写在文件内部，所以一份转手两次的副本，依然说得出自己从哪里来。</p><p class="body">释义一列是英文，不是中文。这份数据是照着官方大纲和 CC-CEDICT 建起来的，两者的对照语言都是英文；把它机器翻译成中文，只会做出一份看着完整、实际不可信的词表。</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/hsk-3.0/downloads/hsk-3.0-complete.json" download data-track="dl-complete">全部内容，一个 JSON 文件 <i class="dl-s">5.1 MB</i></a>
+        <a class="btn btn-ghost" href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license nofollow">CC BY-SA 4.0 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- One table per list. The all-levels row is FIRST because it is the one
+       most people want; the per-level rows underneath are what somebody
+       working through a single level came for, and each links back to the page
+       that renders the same rows in full. -->
+  
+  <section class="row">
+    <div class="rail"><span class="n"></span><span class="l">词</span></div>
+    <div class="col">
+      <h2>词表</h2>
+      <p class="body">HSK 3.0 词汇的全部 11,000 个词，一级一级排开。七、八、九级作为一个区段考查，大纲合为一份 5,600 个词发布；分成三份各约 1,867 个是 Gushi 自己的划分，为的是还有下一级可以去。</p>
+      <div class="bleed tbl dl-tbl">
+        <table>
+          <caption>词表</caption>
+          <thead>
+            <tr>
+              <th scope="col">等级</th>
+              <th scope="col" class="dl-n">行数</th>
+              <th scope="col">CSV</th>
+              <th scope="col">JSON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="dl-l">全部等级</th>
+              <td class="dl-n">11,000</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-all.csv" download>CSV <i class="dl-s">1.7 MB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-all.json" download>JSON <i class="dl-s">3.9 MB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/1">HSK 1</a></th>
+              <td class="dl-n">300</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-1.csv" download>CSV <i class="dl-s">46 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-1.json" download>JSON <i class="dl-s">108 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/2">HSK 2</a></th>
+              <td class="dl-n">200</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-2.csv" download>CSV <i class="dl-s">34 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-2.json" download>JSON <i class="dl-s">76 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/3">HSK 3</a></th>
+              <td class="dl-n">500</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-3.csv" download>CSV <i class="dl-s">89 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-3.json" download>JSON <i class="dl-s">191 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/4">HSK 4</a></th>
+              <td class="dl-n">1,000</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-4.csv" download>CSV <i class="dl-s">173 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-4.json" download>JSON <i class="dl-s">375 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/5">HSK 5</a></th>
+              <td class="dl-n">1,600</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-5.csv" download>CSV <i class="dl-s">274 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-5.json" download>JSON <i class="dl-s">596 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/6">HSK 6</a></th>
+              <td class="dl-n">1,800</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-6.csv" download>CSV <i class="dl-s">275 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-6.json" download>JSON <i class="dl-s">637 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/7">HSK 7</a></th>
+              <td class="dl-n">1,867</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-7.csv" download>CSV <i class="dl-s">258 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-7.json" download>JSON <i class="dl-s">633 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/8">HSK 8</a></th>
+              <td class="dl-n">1,867</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-8.csv" download>CSV <i class="dl-s">251 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-8.json" download>JSON <i class="dl-s">626 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/cihui/9">HSK 9</a></th>
+              <td class="dl-n">1,866</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-9.csv" download>CSV <i class="dl-s">250 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-words-9.json" download>JSON <i class="dl-s">625 kB</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <section class="row">
+    <div class="rail"><span class="n"></span><span class="l">汉字</span></div>
+    <div class="col">
+      <h2>汉字表</h2>
+      <p class="body">HSK 3.0 要求认读的 3,088 个汉字（认读字）。需要手写的那 1,200 个是其中的一个子集。</p>
+      <div class="bleed tbl dl-tbl">
+        <table>
+          <caption>汉字表</caption>
+          <thead>
+            <tr>
+              <th scope="col">等级</th>
+              <th scope="col" class="dl-n">行数</th>
+              <th scope="col">CSV</th>
+              <th scope="col">JSON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="dl-l">全部等级</th>
+              <td class="dl-n">3,088</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-all.csv" download>CSV <i class="dl-s">461 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-all.json" download>JSON <i class="dl-s">1.1 MB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/1">HSK 1</a></th>
+              <td class="dl-n">246</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-1.csv" download>CSV <i class="dl-s">35 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-1.json" download>JSON <i class="dl-s">86 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/2">HSK 2</a></th>
+              <td class="dl-n">125</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-2.csv" download>CSV <i class="dl-s">20 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-2.json" download>JSON <i class="dl-s">47 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/3">HSK 3</a></th>
+              <td class="dl-n">284</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-3.csv" download>CSV <i class="dl-s">46 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-3.json" download>JSON <i class="dl-s">104 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/4">HSK 4</a></th>
+              <td class="dl-n">441</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-4.csv" download>CSV <i class="dl-s">73 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-4.json" download>JSON <i class="dl-s">163 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/5">HSK 5</a></th>
+              <td class="dl-n">431</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-5.csv" download>CSV <i class="dl-s">76 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-5.json" download>JSON <i class="dl-s">164 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/6">HSK 6</a></th>
+              <td class="dl-n">413</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-6.csv" download>CSV <i class="dl-s">67 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-6.json" download>JSON <i class="dl-s">151 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/7">HSK 7</a></th>
+              <td class="dl-n">383</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-7.csv" download>CSV <i class="dl-s">49 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-7.json" download>JSON <i class="dl-s">127 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/8">HSK 8</a></th>
+              <td class="dl-n">383</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-8.csv" download>CSV <i class="dl-s">47 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-8.json" download>JSON <i class="dl-s">125 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/hanzi/9">HSK 9</a></th>
+              <td class="dl-n">382</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-9.csv" download>CSV <i class="dl-s">48 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-characters-9.json" download>JSON <i class="dl-s">126 kB</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <section class="row">
+    <div class="rail"><span class="n"></span><span class="l">语法</span></div>
+    <div class="col">
+      <h2>语法大纲</h2>
+      <p class="body">本站发布的 428 个语法点，每一个都配着大纲印在旁边的格式、一句关于它作用的说明，以及一个例子。七到九级合为一个文件，和大纲发布的样子完全一致。</p>
+      <div class="bleed tbl dl-tbl">
+        <table>
+          <caption>语法大纲</caption>
+          <thead>
+            <tr>
+              <th scope="col">等级</th>
+              <th scope="col" class="dl-n">行数</th>
+              <th scope="col">CSV</th>
+              <th scope="col">JSON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="dl-l">全部等级</th>
+              <td class="dl-n">428</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-all.csv" download>CSV <i class="dl-s">96 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-all.json" download>JSON <i class="dl-s">182 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/1">HSK 1</a></th>
+              <td class="dl-n">45</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-1.csv" download>CSV <i class="dl-s">9 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-1.json" download>JSON <i class="dl-s">20 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/2">HSK 2</a></th>
+              <td class="dl-n">48</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-2.csv" download>CSV <i class="dl-s">10 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-2.json" download>JSON <i class="dl-s">22 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/3">HSK 3</a></th>
+              <td class="dl-n">59</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-3.csv" download>CSV <i class="dl-s">12 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-3.json" download>JSON <i class="dl-s">26 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/4">HSK 4</a></th>
+              <td class="dl-n">67</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-4.csv" download>CSV <i class="dl-s">14 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-4.json" download>JSON <i class="dl-s">29 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/5">HSK 5</a></th>
+              <td class="dl-n">64</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-5.csv" download>CSV <i class="dl-s">15 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-5.json" download>JSON <i class="dl-s">30 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/6">HSK 6</a></th>
+              <td class="dl-n">49</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-6.csv" download>CSV <i class="dl-s">12 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-6.json" download>JSON <i class="dl-s">23 kB</i></a></td>
+            </tr>
+            <tr>
+              <th scope="row" class="dl-l"><a href="/zh/hsk-3.0/yufa/7">HSK 7–9</a></th>
+              <td class="dl-n">96</td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-7.csv" download>CSV <i class="dl-s">24 kB</i></a></td>
+              <td><a href="/hsk-3.0/downloads/hsk-3.0-grammar-7.json" download>JSON <i class="dl-s">45 kB</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- ── The opt-in, and it is AFTER the files on purpose ──────────────────
+       Everything above this line works with JavaScript off, is in the sitemap
+       and is what an answer engine cites. This asks a question of somebody who
+       already has the download; it never stands in front of one. The reasoning
+       is at the top of this file and it does not have an exception.
+
+       The section ships hidden and assets/lead.js reveals it: the form has
+       nowhere to post without fetch(), and a dead control on a page that
+       promises everything works without JavaScript is worse than no control. -->
+  <section class="row" hidden>
+    <div class="rail"><span class="n"></span><span class="l">更新</span></div>
+    <div class="col">
+      <h2>数据有变动时收到消息</h2>
+      <p class="body">大纲不常动，数据会动：一处更正的释义、一个补上的例句、一段新的录音。留个地址，有事情要说的时候我们写一封信。</p>
+
+      <form id="optin-form" class="optin" novalidate>
+        <div class="optin-fields">
+          <label class="optin-f">
+            <span>姓名</span>
+            <input type="text" name="name" autocomplete="name" maxlength="120">
+          </label>
+          <label class="optin-f">
+            <span>邮箱</span>
+            <input type="email" name="email" autocomplete="email" maxlength="320" required>
+          </label>
+        </div>
+
+        <!-- The honeypot. Hidden from sight, from the tab order and from a
+             screen reader; anything that fills it is not a reader. -->
+        <div class="optin-hp" aria-hidden="true"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+
+        <label class="optin-consent">
+          <input type="checkbox" name="consent" required>
+          <span>好，HSK 3.0 数据更新时写信告诉我。除此之外不要发别的。</span>
+        </label>
+
+        <div class="optin-actions">
+          <button class="btn btn-primary btn-sm" type="submit">通知我</button>
+          <p class="optin-status" data-optin-status hidden></p>
+        </div>
+
+        <p class="fine">姓名和地址只用于这一件事，不做别的用途，您随时可以要求我们删除。 <a href="/privacy" data-en="/privacy" data-es="/privacy" data-fr="/privacy" data-de="/privacy" data-zh="/privacy" hreflang="en">隐私政策 →</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Same rule and same reason as #hsk-i18n on the hub: raw, because inside a
+       <script> the browser decodes no entities, so no value here may contain a
+       double quote. copy.mjs carries the matching note. -->
+  <script type="application/json" id="optin-i18n">
+{
+  "h2": "数据有变动时收到消息",
+  "barTitle": "谢谢——文件是您的了。数据有变动时要不要通知您？",
+  "nameLabel": "姓名",
+  "emailLabel": "邮箱",
+  "consent": "好，HSK 3.0 数据更新时写信告诉我。除此之外不要发别的。",
+  "submit": "通知我",
+  "close": "关闭",
+  "sending": "正在保存…",
+  "done": "快好了——去收件箱确认一下，就在名单上了。",
+  "failed": "没有保存成功。再试一次，或者直接写信给我们。",
+  "badEmail": "这个地址看起来不太对。"
+}
+  </script>
+
+  <section class="row">
+    <div class="rail"><span class="n"></span><span class="l">列</span></div>
+    <div class="col">
+      <h2>每一列是什么</h2>
+      <p class="body">两种格式的列完全相同，顺序也相同。JSON 在每个文件内部都重复一遍这些说明，所以一份转手两次的文件依然能自己解释自己。</p>
+      <dl class="deflist">
+        <dt><code>level</code></dt><dd>HSK 3.0 等级，1 到 9。</dd>
+        <dt><code>hanzi</code></dt><dd>简体中文的词或字。</dd>
+        <dt><code>pinyin</code></dt><dd>带声调符号的拼音。</dd>
+        <dt><code>tones</code></dt><dd>每个音节一个声调数字，用空格分隔。5 表示轻声。</dd>
+        <dt><code>meaning</code></dt><dd>英文释义。多个义项之间用分号分隔。</dd>
+        <dt><code>exampleChinese, examplePinyin, exampleEnglish</code></dt><dd>一个例句，中文、拼音、英文三种形式。</dd>
+        <dt><code>audio</code></dt><dd>这个词的录音地址；没有录音时为空。</dd>
+        <dt><code>point, pattern, explanation</code></dt><dd>仅语法文件：大纲给这个语法点的名称、印在旁边的格式，以及一句关于它作用的说明。</dd>
+        <dt><code>categoryChinese, categoryEnglish</code></dt><dd>仅语法文件：这个语法点在大纲中所属的章节。</dd>
+      </dl>
+      <p class="fine">一个录音地址长这样：/audio/az-5f97.mp3，其中的十六进制就是那个汉字本身。这些录音可以自由地从本站播放，也是许可协议唯一没有涵盖的一列——见下文。请不要从自己的产品里直接盗链。</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail"><span class="n"></span><span class="l">许可</span></div>
+    <div class="col">
+      <h2>拿去用，记得署名</h2>
+      <p class="body">数据以知识共享 署名-相同方式共享 4.0（CC BY-SA 4.0）发布。您可以复制它、修改它、在它之上做出别的东西并把成果拿去卖，只有两个条件：注明 Gushi 并给出链接，以及把任何衍生作品以同样的许可传下去。</p><p class="body">相同方式共享不是我们的偏好。英文释义改编自 CC-CEDICT，而它本身就是 CC BY-SA，所以这份数据从一开始就不可能以更宽松的条款发布。</p><p class="body">audio 一列指向的录音是这一切之外的例外。它们是合成语音；任何人都可以从本站播放，但我们没有资格把它们当作语料库转交出去，所以许可协议不涵盖它们。</p>
+      <!-- The credit is printed as the exact markup we would like back, because
+           an attribution requirement whose wording is left to the reader
+           produces a hundred different credits and no links. -->
+      <p class="fine">我们请求的署名，可以直接复制：</p>
+      <pre class="snip"><code>&lt;a href=&quot;https://gushichinese.com/hsk-3.0/downloads&quot;&gt;HSK 3.0 syllabus data by Gushi&lt;/a&gt;, CC BY-SA 4.0</code></pre>
+      <p class="fine">来源：词表出自 HSK 3.0 的官方《考试大纲》，2025 年 11 月发布。英文释义改编自 CC-CEDICT（CC BY-SA 4.0），例句大部分来自 Tatoeba 项目（CC BY 2.0 FR），选词、拼音、声调数字和校对是我们做的。数据最后核对于 2026-10-14。</p>
+      <div class="cta-row">
+        <a class="btn btn-ghost btn-sm" href="/hsk-3.0/downloads/LICENCE.txt">许可协议的文本文件 →</a>
+        <a class="btn btn-ghost btn-sm" href="/zh/hsk-3.0" data-en="/hsk-3.0" data-es="/es/hsk-3.0" data-fr="/fr/hsk-3.0" data-de="/de/hsk-3.0" data-zh="/zh/hsk-3.0">返回 HSK 3.0 指南 →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/assets/optin.js" defer></script>
+
+</main>
+
+<!-- THE PICTURE CREDITS LINK IS NOT HERE ANY MORE, and that is a decision
+     with a condition attached. It moved to the last block of /about, which
+     this footer links to — so the path from any page to the attribution is
+     two clicks rather than one. It survives only while no photograph from
+     media-credits.json is displayed on a page a visitor can reach; the only
+     one that shows them today is /credits itself, which credits each work
+     beside it. Put a photo band back on a page and the direct link belongs
+     back here, because CC BY-SA makes naming the author a condition of use
+     rather than a courtesy. -->
+<footer class="site">
+  <div class="wrap foot-partners"><span class="who">创始合作伙伴</span><!-- ── THE FOUNDING PARTNERS' LOGOS ────────────────────────────────────────
+     Only the logos. Each caller says what they are in its own voice: a serif
+     heading and a sentence on /teaching and /app, the small tracked caps of
+     the door's own kickers on the door and in the footer. The footer draws
+     them on every page that does not already (`partnersInFooter` in
+     build-web.mjs), so no page shows a logo twice.
+
+     WHAT WE MAY SAY IS WHAT THE LETTER OF INTENT SAYS. The school signed it in
+     September 2026, starting 2026-10-03; the signed copy is not in this
+     repository. It names them a
+     FOUNDING PARTNER, lets us show their name and logo as that on this site,
+     and has us remove both if they ask. So the label is "Founding Partner",
+     not "pilot school", and no line on this site claims more than the letter
+     does: their students and teachers try the app and give feedback. Nothing
+     says what the school thinks of it or how it teaches. That is theirs to
+     say.
+
+     The file is the logo in the header of their own site
+     (bilder/logo/logo50.jpg), re-encoded and nothing else. Their older
+     bilder/logo/logo.jpg is a superseded mark: do not swap it in because it
+     is larger. 536 pixels is all there is, so it is never drawn wider than
+     300; a sharper version has to come from the school.
+
+     The logo reads "Chinesische Sprachschule zu Köln e.V.", the registered
+     name, so no text line repeats it; the alt carries the same literal in
+     every language, because a legal name does not translate.
+
+     The white of the JPEG is multiplied into the paper rather than cut out:
+     the ink wash behind the branch is soft grey, and a keyed edge would halo. -->
+<div class="fp-logos">
+  <a class="fp-logo" href="https://www.chinesische-schule-koeln.de/" rel="noopener" target="_blank" data-track="partner-csk">
+    <img src="/assets/partners/csk-536.webp" width="536" height="161" loading="lazy" decoding="async"
+         alt="Chinesische Sprachschule zu Köln e.V.">
+  </a>
+</div>
+</div>
+  <div class="wrap foot-row">
+    <span>© 2026 Gushi</span>
+    <nav aria-label="Footer">
+      <a href="/zh/app" data-en="/app" data-es="/es/app" data-fr="/fr/app" data-de="/de/app" data-zh="/zh/app">iOS App</a>
+      <a href="/zh/teaching" data-en="/teaching" data-es="/es/teaching" data-fr="/fr/teaching" data-de="/de/teaching" data-zh="/zh/teaching">教学平台</a>
+      <a href="/zh/hsk-3.0" data-en="/hsk-3.0" data-es="/es/hsk-3.0" data-fr="/fr/hsk-3.0" data-de="/de/hsk-3.0" data-zh="/zh/hsk-3.0">HSK 3.0 资料库</a>
+      <a href="/zh/video" data-en="/video" data-es="/es/video" data-fr="/fr/video" data-de="/de/video" data-zh="/zh/video">产品视频</a>
+      <a href="/zh/hsk-3.0/downloads" data-en="/hsk-3.0/downloads" data-es="/es/hsk-3.0/downloads" data-fr="/fr/hsk-3.0/downloads" data-de="/de/hsk-3.0/downloads" data-zh="/zh/hsk-3.0/downloads">资料下载</a>
+      <a href="/zh/about" data-en="/about" data-es="/es/about" data-fr="/fr/about" data-de="/de/about" data-zh="/zh/about">关于我们</a>
+      <a href="/privacy" data-en="/privacy" data-es="/privacy" data-fr="/privacy" data-de="/privacy" data-zh="/privacy" hreflang="en">隐私政策</a>
+      <a href="/impressum" data-en="/impressum" data-es="/impressum" data-fr="/impressum" data-de="/impressum" data-zh="/impressum" hreflang="de">法律声明</a>
+      <a href="mailto:hello@gushichinese.com">联系我们</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Launch day only: PRODUCT_HUNT_URL in copy.mjs is empty on every other day,
+     and then nothing here is emitted. In the footer partial because it is the
+     one partial every page includes; the door has no nav bar. -->
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,282 @@
+{
+ "schema": "life-flash.v1",
+ "items": [
+  {
+   "id": "rider",
+   "title": "爸爸这边的雨",
+   "line": "闺女问他，那边怎么天天都在下雨；梅里爱替他拍了一卷上了色的雨",
+   "file": "rider.html",
+   "cover": "rider.jpg",
+   "who": "外卖骑手",
+   "host": {
+    "id": "melies",
+    "name": "乔治·梅里爱"
+   },
+   "place": "梅里爱的玻璃摄影棚",
+   "space": "melies",
+   "quote": "昨天晚上下大雨，我跑到第十七单，在电梯口把一份酸辣粉的汤洒了一半。",
+   "minutes": 1.8,
+   "palette": [
+    "#231b22",
+    "#f4d265",
+    "#ec9aa2",
+    "#86b4e0"
+   ],
+   "dark": true,
+   "made": {
+    "edition": 2,
+    "by": "hand, by the claude-opus-5-5 teams (docs/flash-v2.md)",
+    "plates": "painted by the gateway's image models (gpt-image-2.5-sunburst, gemini-3-pro-image-preview, wan2.7-image-pro, doubao-seedream-5-0), composed by hand",
+    "finish": "play-tested by hand",
+    "quotes": "checked against docs/research/sources.md; English renderings are our own"
+   },
+   "created": "2026-10-07",
+   "turn": "当一回外卖骑手——晚上十点四十，第十七单",
+   "en": {
+    "title": "The Rain Where Papa Is",
+    "line": "His daughter asks why it always rains where he is. Méliès films him a reel of hand-coloured rain.",
+    "file": "rider.en.html",
+    "cover": "rider.en.jpg",
+    "who": "the delivery rider",
+    "turn": "Your turn as the delivery rider — 10:40 p.m., the seventeenth order",
+    "host": {
+     "id": "melies",
+     "name": "Georges Méliès"
+    },
+    "place": "Méliès' glass studio",
+    "quote": "Last night it poured. On my seventeenth order I spilled half the hot-and-sour noodles by the lift."
+   }
+  },
+  {
+   "id": "nurse",
+   "title": "凌晨三点的脉案",
+   "line": "她整夜听四十二张床，十二床每夜听她的脚步；李时珍替她把这一夜号成一张脉案",
+   "file": "nurse.html",
+   "cover": "nurse.jpg",
+   "who": "夜班护士",
+   "host": {
+    "id": "lishizhen",
+    "name": "李时珍"
+   },
+   "place": "李时珍在蕲州的药铺",
+   "space": "lishizhen",
+   "quote": "我在肿瘤科上夜班，凌晨三点最难熬，整层楼只有监护仪在滴滴地响。",
+   "minutes": 1.8,
+   "palette": [
+    "#3e3546",
+    "#f2e9d6",
+    "#f6deb0",
+    "#b8432c"
+   ],
+   "dark": true,
+   "made": {
+    "edition": 2,
+    "by": "hand, by the claude-opus-5-5 teams (docs/flash-v2.md)",
+    "plates": "painted by the gateway's image models (gpt-image-2.5-sunburst, gemini-3-pro-image-preview, wan2.7-image-pro, doubao-seedream-5-0), composed by hand",
+    "finish": "play-tested by hand",
+    "quotes": "checked against docs/research/sources.md; English renderings are our own"
+   },
+   "created": "2026-10-07",
+   "turn": "当一回夜班护士——凌晨三点，一层楼四十二张床",
+   "en": {
+    "title": "A Pulse Record at 3 a.m.",
+    "line": "All night she listens to forty-two beds; bed twelve listened for her footsteps. Li Shizhen writes her night up as a pulse record.",
+    "file": "nurse.en.html",
+    "cover": "nurse.en.jpg",
+    "who": "the night nurse",
+    "turn": "Your turn as the night nurse — 3 a.m., forty-two beds on one floor",
+    "host": {
+     "id": "lishizhen",
+     "name": "Li Shizhen"
+    },
+    "place": "Li Shizhen's apothecary in Qizhou",
+    "quote": "I work nights on the cancer ward. Three in the morning is the hardest; all you hear on the floor is the monitors."
+   }
+  },
+  {
+   "id": "exam",
+   "title": "三十道",
+   "line": "离考研还有三十天；说书人把这三十天，说成《西游记》的第一百零一回",
+   "file": "exam.html",
+   "cover": "exam.jpg",
+   "who": "考研的学生",
+   "host": {
+    "id": "xiyou",
+    "name": "《西游记》"
+   },
+   "place": "西天取经路",
+   "space": "xiyou",
+   "quote": "离考研还有三十天。",
+   "minutes": 1.8,
+   "palette": [
+    "#efe3c5",
+    "#2b2420",
+    "#b0432f",
+    "#8c7a60"
+   ],
+   "dark": false,
+   "made": {
+    "edition": 2,
+    "by": "hand, by the claude-opus-5-5 teams (docs/flash-v2.md)",
+    "plates": "painted by the gateway's image models (gpt-image-2.5-sunburst, gemini-3-pro-image-preview, wan2.7-image-pro, doubao-seedream-5-0), composed by hand",
+    "finish": "play-tested by hand",
+    "quotes": "checked against docs/research/sources.md; English renderings are our own"
+   },
+   "created": "2026-10-08",
+   "turn": "当一回考研的学生——图书馆四楼靠窗，最后三十天",
+   "en": {
+    "title": "Thirty Strokes",
+    "line": "Thirty days before the exam. The storyteller of Journey to the West tells them as its chapter one hundred and one.",
+    "file": "exam.en.html",
+    "cover": "exam.en.jpg",
+    "who": "the student",
+    "turn": "Your turn as the student — fourth floor of the library, by the window, the last thirty days",
+    "host": {
+     "id": "xiyou",
+     "name": "Journey to the West"
+    },
+    "place": "the road to the West",
+    "quote": "Thirty days until the exam."
+   }
+  },
+  {
+   "id": "mother",
+   "title": "凌晨四点的卧室",
+   "line": "她把凌晨四点画成一幅画，梵高挂上床头，先问她好不好",
+   "file": "mother.html",
+   "cover": "mother.jpg",
+   "who": "新手妈妈",
+   "host": {
+    "id": "vangogh",
+    "name": "文森特·梵高"
+   },
+   "place": "梵高在阿尔勒的卧室",
+   "space": "vangogh",
+   "quote": "宝宝出生二十六天了。",
+   "minutes": 1.9,
+   "palette": [
+    "#1c2a62",
+    "#f2c12e",
+    "#f7f0c8",
+    "#e2432a"
+   ],
+   "dark": true,
+   "made": {
+    "edition": 2,
+    "by": "hand, by the claude-opus-5-5 teams (docs/flash-v2.md)",
+    "plates": "painted by the gateway's image models (gpt-image-2.5-sunburst, gemini-3-pro-image-preview, wan2.7-image-pro, doubao-seedream-5-0), composed by hand",
+    "finish": "play-tested by hand",
+    "quotes": "checked against docs/research/sources.md; English renderings are our own"
+   },
+   "created": "2026-10-08",
+   "turn": "当一回新手妈妈——凌晨四点，一次九十毫升",
+   "en": {
+    "title": "The Bedroom at Four in the Morning",
+    "line": "She paints four in the morning; Van Gogh hangs it above his bed and asks, first, how she is",
+    "file": "mother.en.html",
+    "cover": "mother.en.jpg",
+    "who": "the new mother",
+    "turn": "Your turn as the new mother — 4 a.m., ninety millilitres a feed",
+    "host": {
+     "id": "vangogh",
+     "name": "Vincent van Gogh"
+    },
+    "place": "Van Gogh's bedroom in Arles",
+    "quote": "The baby is twenty-six days old."
+   }
+  },
+  {
+   "id": "shop",
+   "title": "一中门口的",
+   "line": "二十一年的赊账本，翻快了就是一部电影；最后镜头转过身来，片头上写着他",
+   "file": "shop.html",
+   "cover": "shop.jpg",
+   "who": "开小卖部的",
+   "turn": "当一回小卖部老板——县一中对面，第二十一年",
+   "host": {
+    "id": "melies",
+    "name": "乔治·梅里爱"
+   },
+   "place": "梅里爱的玻璃摄影棚",
+   "quote": "我在县一中对面开小卖部，开了二十一年。",
+   "space": "melies",
+   "minutes": 1.8,
+   "palette": [
+    "#231b22",
+    "#f28a36",
+    "#86b4e0",
+    "#f4d265"
+   ],
+   "dark": true,
+   "en": {
+    "title": "The Man at the School Gate",
+    "line": "Twenty-one years of a credit ledger, flipped fast enough, become a film; at the end the camera turns round to him.",
+    "file": "shop.en.html",
+    "cover": "shop.en.jpg",
+    "who": "the shopkeeper",
+    "turn": "Your turn as the shopkeeper — across from the county high school, year twenty-one",
+    "host": {
+     "id": "melies",
+     "name": "Georges Méliès"
+    },
+    "place": "Méliès' glass studio",
+    "quote": "I've kept a shop across from the county high school for twenty-one years."
+   },
+   "made": {
+    "edition": 2,
+    "by": "hand, by the claude-opus-5-5 teams (docs/flash-v2.md)",
+    "plates": "painted by the gateway's image models (gpt-image-2.5-sunburst, gemini-3-pro-image-preview, wan2.7-image-pro, doubao-seedream-5-0), composed by hand",
+    "finish": "play-tested by hand",
+    "quotes": "checked against docs/research/sources.md; English renderings are our own"
+   },
+   "created": "2026-10-07"
+  },
+  {
+   "id": "market",
+   "title": "本草·韭",
+   "line": "他学着挑嫩韭菜，李时珍陪他掐；最后把他和她的话，刻进《本草纲目》的一页",
+   "file": "market.html",
+   "cover": "market.jpg",
+   "who": "退休的老人",
+   "host": {
+    "id": "lishizhen",
+    "name": "李时珍"
+   },
+   "place": "李时珍在蕲州的药铺",
+   "space": "lishizhen",
+   "quote": "老伴走了一年多。",
+   "minutes": 1.9,
+   "palette": [
+    "#efe6d2",
+    "#3a2e28",
+    "#9db8a0",
+    "#b8432c"
+   ],
+   "dark": false,
+   "made": {
+    "edition": 2,
+    "by": "hand, by the claude-opus-5-5 teams (docs/flash-v2.md)",
+    "plates": "painted by the gateway's image models (gpt-image-2.5-sunburst, gemini-3-pro-image-preview, wan2.7-image-pro, doubao-seedream-5-0), composed by hand",
+    "finish": "play-tested by hand",
+    "quotes": "checked against docs/research/sources.md; English renderings are our own"
+   },
+   "created": "2026-10-07",
+   "turn": "当一回早市上的老人——早上六点，她那辆红色的买菜小车",
+   "en": {
+    "title": "The Herbal: Chives",
+    "line": "He is learning to pick tender chives. Li Shizhen pinches them with him, then cuts his words and hers into a page of the herbal.",
+    "file": "market.en.html",
+    "cover": "market.en.jpg",
+    "who": "the old man at the morning market",
+    "turn": "Your turn as the old man at the morning market — 6 a.m., her red shopping trolley",
+    "host": {
+     "id": "lishizhen",
+     "name": "Li Shizhen"
+    },
+    "place": "Li Shizhen's apothecary in Qizhou",
+    "quote": "My wife has been gone a little over a year."
+   }
+  }
+ ],
+ "updated": "2026-10-08T09:14:22.499Z"
+}
